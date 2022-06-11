@@ -1,0 +1,55 @@
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1470092306007-055b6797ca72?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Predictive - Checkbox</h1>
+            <span class="subheading">Predictive - Checkbox</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <table>
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Url</th>
+        <th>Status</th>
+        <th>Processed</th>
+        <th>Unprocessed</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dat in all_data %}
+        <tr>
+          <td>{{ dat.id }}</td>
+          <td><span style="display:block;
+    width:800px;
+    word-wrap:break-word;"><a target="_blank" href="{{dat.url}}">{{ dat.url }}</a></span></td>
+          {% if dat.status == 1 %}
+            <td><span style="color: green">True</span></td>
+          {% elif dat.status == -1 %}
+            <td><span style="color: red">False</span></td>
+          {% else %}
+            <td><span style="color: gray">Neutral</span></td>
+          {% endif %}
+          <td><a style="color: green" href="{{ url_for('status_one', dat_id=dat.id) }}">Processed</a></td>
+          <td><a style="color: red" href="{{ url_for('status_minus_one', dat_id=dat.id) }}"> Not Processed</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</table>
+  </div>
+  <hr>
+
+{% include "footer.html" %}
